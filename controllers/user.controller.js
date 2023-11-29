@@ -1,20 +1,22 @@
 const userModel = require('../models/user.model');
 const orderUserIdModel = require('../models/orderUserId.model');
 const orderModel = require('../models/order.model');
+require("dotenv").config();
 const axios = require('axios');
 
 /*** fetch list of all users */
 exports.verifyUser = async (req, res) => {
     try {
         console.log('.');
+        console.log(process.env.Authorization);
         console.log('merchantId>>'+JSON.stringify(req.body));
         const merchantId = req.body.merchantId;
         
-        const apiUrlMerch = `https://return-x.bubbleapps.io/version-live/api/1.1/wf/initiation`;
+        const apiUrlMerch = process.env.apiUrlMerch;
 
         const axiosConfigMerch = {
             headers: {
-            'Authorization': 'Bearer 3c6da2551638a0b1ce21d7757a235430',
+            'Authorization': process.env.Authorization,
             },
             params: {
             'portal_slug': `${merchantId}`
